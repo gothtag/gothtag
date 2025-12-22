@@ -9,6 +9,7 @@ export function Navigation() {
     { href: "/", label: "Home" },
     { href: "/community", label: "Coven" },
     { href: "/faq", label: "Truths" },
+    { href: "/socials", label: "Links" },
     { href: "/apply", label: "Join" },
   ];
 
