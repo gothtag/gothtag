@@ -18,7 +18,7 @@ export function Navigation() {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/">
           <span className="font-display text-2xl tracking-[0.2em] text-white cursor-pointer hover:opacity-80 transition-opacity">
-            NOCTURNE
+            GOTHTAG
           </span>
         </Link>
 

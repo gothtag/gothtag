@@ -22,7 +22,7 @@ export default function Home() {
               Welcome to the Void
             </span>
             <h1 className="text-6xl md:text-8xl lg:text-9xl text-white font-display tracking-wide leading-tight">
-              NOCTURNE
+              GOTHTAG
             </h1>
           </motion.div>
 

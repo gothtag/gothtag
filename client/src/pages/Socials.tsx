@@ -1,7 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { motion } from "framer-motion";
-import { Github, Twitter, MessageCircle, ExternalLink } from "lucide-react";
+import { MessageCircle, ExternalLink, Instagram, Music } from "lucide-react";
 
 const socialLinks = [
   {
@@ -11,6 +11,43 @@ const socialLinks = [
     icon: MessageCircle,
     gradient: "from-indigo-500/20 to-purple-500/20",
     borderColor: "border-indigo-500/40",
+  },
+  {
+    name: "Instagram",
+    description: "Visual moments from the void.",
+    url: "https://www.instagram.com/goth.tag/",
+    icon: Instagram,
+    gradient: "from-pink-500/20 to-rose-500/20",
+    borderColor: "border-pink-500/40",
+  },
+  {
+    name: "Linktree",
+    description: "All links in one place.",
+    url: "https://linktr.ee/gothtag",
+    icon: ExternalLink,
+    gradient: "from-cyan-500/20 to-blue-500/20",
+    borderColor: "border-cyan-500/40",
+  },
+  {
+    name: "TikTok",
+    description: "Short rituals and moments.",
+    url: "https://www.tiktok.com/@gothtag/",
+    icon: Music,
+    gradient: "from-slate-500/20 to-gray-500/20",
+    borderColor: "border-slate-500/40",
+  },
+];
+
+const creators = [
+  {
+    name: "levh (ev)",
+    role: "Founder",
+    avatar: "https://i.imgur.com/MICixot.jpeg",
+  },
+  {
+    name: "purrw (ey)",
+    role: "Co-Founder",
+    avatar: "https://i.imgur.com/Yfp57Ae.jpeg",
   },
 ];
 
@@ -38,7 +75,7 @@ export default function Socials() {
         </motion.div>
 
         {/* Social links grid - Linktree style */}
-        <div className="max-w-lg mx-auto space-y-4">
+        <div className="max-w-lg mx-auto space-y-4 mb-20">
           {socialLinks.map((link, index) => {
             const Icon = link.icon;
             return (
@@ -72,12 +109,53 @@ export default function Socials() {
           })}
         </div>
 
+        {/* Creators Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="max-w-2xl mx-auto border-t border-white/10 pt-20"
+        >
+          <div className="text-center mb-12">
+            <span className="block text-white/40 font-display text-sm tracking-[0.4em] uppercase mb-4">
+              The Architects
+            </span>
+            <h2 className="text-4xl font-display text-white tracking-wide">
+              Our Creators
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-lg mx-auto">
+            {creators.map((creator, index) => (
+              <motion.div
+                key={creator.name}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 + index * 0.1 }}
+                className="flex flex-col items-center space-y-4 border border-white/10 p-8 bg-black/30 backdrop-blur-sm"
+              >
+                <div className="w-24 h-24 rounded-full border-2 border-white/30 overflow-hidden flex-shrink-0">
+                  <img 
+                    src={creator.avatar}
+                    alt={creator.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="text-center">
+                  <h3 className="text-white font-display text-lg tracking-wide">{creator.name}</h3>
+                  <p className="text-white/50 text-sm font-light">{creator.role}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Additional context */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="max-w-lg mx-auto mt-20 text-center border-t border-white/10 pt-12"
+          transition={{ duration: 0.8, delay: 1 }}
+          className="max-w-lg mx-auto text-center mt-20 border-t border-white/10 pt-12"
         >
           <p className="text-white/40 text-sm font-light leading-relaxed">
             All our networks are public. No verification required.
