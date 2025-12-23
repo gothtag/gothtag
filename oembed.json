@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "type": "rich",
+  "width": 480,
+  "height": 320,
+  "title": "Gothtag | Goth Community",
+  "description": "A place for goth culture, art, music, and people who actually get it",
+  "url": "https://gothtag-site.netlify.app",
+  "thumbnail_url": "https://gothtag-site.netlify.app/attached_assets/banner.png",
+  "thumbnail_width": 240,
+  "thumbnail_height": 160,
+  "provider_name": "GOTHTAG",
+  "provider_url": "https://gothtag-site.netlify.app"
+}
