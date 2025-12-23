@@ -49,6 +49,7 @@ async function buildAll() {
     "me.html",
     "ey.html",
     "7.html",
+    "matcha.html",
   ];
 
   await Promise.all(staticHtmlFiles.map((file) => cp(file, `dist/${file}`)));
