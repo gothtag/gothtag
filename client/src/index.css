@@ -7,6 +7,8 @@
 :root {
   --font-display: 'Cinzel', serif;
   --font-body: 'Lora', serif;
+  --cursor-url: url('https://r2.guns.lol/907a5965-28c8-482a-a9de-90083a3bf626.png');
+}
 
   /* Deep Black & Stark White Palette */
   --background: 0 0% 2%;        /* #050505 */
@@ -35,6 +37,9 @@
 @layer base {
   * {
     @apply border-border;
+  }
+  html {
+    cursor: url('https://r2.guns.lol/907a5965-28c8-482a-a9de-90083a3bf626.png'), auto;
   }
   body {
     @apply bg-background text-foreground antialiased selection:bg-white selection:text-black;

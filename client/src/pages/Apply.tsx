@@ -32,6 +32,7 @@ export default function Apply() {
     return (
       <div className="min-h-screen flex flex-col bg-background">
         <Navigation />
+        <div className="pt-20" />
         <main className="flex-1 flex items-center justify-center p-6">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
@@ -59,8 +60,9 @@ export default function Apply() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navigation />
+      <div className="pt-20" />
       
-      <main className="flex-1 pt-32 pb-20 px-6 max-w-2xl mx-auto w-full">
+      <main className="flex-1 pt-12 pb-20 px-6 max-w-2xl mx-auto w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -6,50 +6,29 @@ export function Navigation() {
   const [location] = useLocation();
 
   const links = [
-    { href: "/", label: "Home" },
-    { href: "/community", label: "Coven" },
-    { href: "/faq", label: "Truths" },
-    { href: "/socials", label: "Links" },
-    { href: "/apply", label: "Join" },
+    { href: "/home", label: "Home" },
+    { href: "/community", label: "Community" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/socials", label: "Support" },
+    { href: "/home", label: "Join Us" },
+    { href: "/apply", label: "Apply" },
   ];
 
   return (
-    <nav className="fixed top-0 w-full z-50 border-b border-white/10 bg-background/80 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        <Link href="/">
-          <span className="font-display text-2xl tracking-[0.2em] text-white cursor-pointer hover:opacity-80 transition-opacity">
-            GOTHTAG
-          </span>
-        </Link>
-
-        <div className="hidden md:flex gap-12">
-          {links.map((link) => (
-            <Link key={link.href} href={link.href}>
-              <div className="relative group cursor-pointer py-2">
-                <span
-                  className={cn(
-                    "font-display text-sm tracking-[0.25em] uppercase transition-colors duration-300",
-                    location === link.href ? "text-white" : "text-white/50 group-hover:text-white"
-                  )}
-                >
-                  {link.label}
-                </span>
-                {location === link.href && (
-                  <motion.div
-                    layoutId="underline"
-                    className="absolute bottom-0 left-0 w-full h-[1px] bg-white"
-                    transition={{ duration: 0.3 }}
-                  />
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* Mobile menu button could go here */}
-        <div className="md:hidden text-white/50 text-xs tracking-widest uppercase">
-          Menu
-        </div>
+    <nav className="fixed top-0 w-full z-50 bg-background/50 backdrop-blur-sm pt-6 pb-4">
+      <div className="max-w-7xl mx-auto px-6 flex items-center justify-center flex-wrap gap-4">
+        {links.map((link) => (
+          <Link key={link.href} href={link.href}>
+            <button
+              className={cn(
+                "px-6 py-2 border border-white/30 font-display text-xs tracking-[0.2em] uppercase transition-all duration-300 hover:bg-white hover:text-black",
+                location === link.href ? "bg-white text-black" : "text-white/70"
+              )}
+            >
+              + {link.label}
+            </button>
+          </Link>
+        ))}
       </div>
     </nav>
   );

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOTHTAG - The Community</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="attached_assets/gothtag_black.png">
+    <link rel="shortcut icon" type="image/png" href="attached_assets/gothtag_black.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Source Sans Pro', 'sans-serif'],
+                        'body': ['Roboto', 'sans-serif']
+                    },
+                    colors: {
+                        background: 'hsl(0 0% 2%)',
+                        foreground: 'hsl(0 0% 96%)',
+                        primary: 'hsl(0 0% 96%)',
+                        secondary: 'hsl(0 0% 9%)',
+                        muted: 'hsl(0 0% 15%)',
+                        border: 'hsl(0 0% 20%)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #050505;
+            color: #f5f5f5;
+            cursor: url('attached_assets/cursor2.png') 1 1, auto;
+        }
+        h1, h2, h3 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 40;
+            background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f5f5f5;
+        }
+        .nav-button {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: rgba(255,255,255,0.7);
+            background: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-button:hover, .nav-button.active {
+            background: white;
+            color: black;
+            transform: translateY(-1px);
+        }
+                
+        .gothic-button {
+            padding: 1rem 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+            background: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .gothic-button:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+            cursor: url('attached_assets/cursor.png') 1 1, auto;
+        }
+        .member-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .member-card:hover {
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }        a, button, .nav-button, .gothic-button, [role="button"], .social-link, .creator-card, .member-card {
+            cursor: url('attached_assets/cursor.png') 1 1, auto;
+        }        .fade-in {
+            opacity: 0;
+            transform: translateY(25px);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform, opacity;
+        }
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+            filter: contrast(1.8) brightness(0.4);
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Background Video -->
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="https://r2.guns.lol/cb266527-84f4-4c15-833c-8c6dc327af31.mp4" type="video/mp4">
+    </video>
+
+    <div class="bg-noise"></div>
+    <div class="bg-noise"></div>
+    <div class="vignette"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-sm pt-6 pb-4">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-center flex-wrap gap-4">
+            <a href="home.html" class="nav-button">+ Home</a>
+            <a href="community.html" class="nav-button active">+ Community</a>
+            <a href="faq.html" class="nav-button">+ FAQ</a>
+            <a href="socials.html" class="nav-button">+ Socials</a>
+            <a href="apply.html" class="nav-button">+ Apply</a>
+        </div>
+    </nav>
+
+    <div class="pt-20"></div>
+
+    <main class="flex-1 pt-12 pb-20 px-6">
+        <!-- Hero Section -->
+        <div class="max-w-4xl mx-auto text-center mb-20">
+            <span class="block text-white/40 font-display text-sm tracking-[0.4em] uppercase mb-4 fade-in">
+                Our
+            </span>
+            <h1 class="text-5xl md:text-7xl font-display text-white tracking-wide mb-6 fade-in" style="animation-delay: 0.2s;">
+                Community
+            </h1>
+            <p class="text-white/50 mt-6 text-lg font-light fade-in" style="animation-delay: 0.4s;">
+                A collective of visionaries bound by darkness and united in silence.
+            </p>
+        </div>
+
+        <!-- Community Description -->
+        <div class="max-w-4xl mx-auto mb-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="space-y-6 fade-in" style="animation-delay: 0.6s;">
+                    <h2 class="text-3xl font-display text-white tracking-wide">Who We Are</h2>
+                    <p class="text-white/60 leading-relaxed">
+                        GOTHTAG is more than a community—it's a digital coven. We are artists, writers, musicians, and creators who find inspiration in the shadows. Our work explores themes of darkness, mystery, and the occult, creating pieces that resonate with those who walk between worlds.
+                    </p>
+                    <p class="text-white/60 leading-relaxed">
+                        We believe in the power of silence, the beauty of the unseen, and the strength found in embracing one's shadow self. Our community provides a safe space for creative expression without judgment or expectation.
+                    </p>
+                </div>
+
+                <div class="space-y-6 fade-in" style="animation-delay: 0.8s;">
+                    <h2 class="text-3xl font-display text-white tracking-wide">What We Create</h2>
+                    <ul class="space-y-4 text-white/60">
+                        <li class="flex items-start gap-3">
+                            <span class="text-white/40 mt-1">•</span>
+                            <span>Digital art and illustrations inspired by gothic and occult themes</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-white/40 mt-1">•</span>
+                            <span>Poetry and literature exploring darkness and mystery</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-white/40 mt-1">•</span>
+                            <span>Music and sound design that evokes atmospheric tension</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-white/40 mt-1">•</span>
+                            <span>Photography capturing the beauty in shadows and decay</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-white/40 mt-1">•</span>
+                            <span>Web design and digital experiences with gothic aesthetics</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Community Values -->
+        <div class="max-w-6xl mx-auto mb-20">
+            <h2 class="text-4xl font-display text-white tracking-wide text-center mb-12 fade-in" style="animation-delay: 1s;">Our Values</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="member-card fade-in">
+                    <div class="text-4xl mb-4">🤫</div>
+                    <h3 class="text-white font-display text-xl mb-4">Silence</h3>
+                    <p class="text-white/50">We communicate through our art, not empty words. True understanding comes from creation, not conversation.</p>
+                </div>
+
+                <div class="member-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="text-4xl mb-4">🌑</div>
+                    <h3 class="text-white font-display text-xl mb-4">Authenticity</h3>
+                    <p class="text-white/50">We embrace our shadow selves and create from a place of genuine darkness, not performative goth aesthetics.</p>
+                </div>
+
+                <div class="member-card fade-in" style="animation-delay: 0.4s;">
+                    <div class="text-4xl mb-4">🔮</div>
+                    <h3 class="text-white font-display text-xl mb-4">Mystery</h3>
+                    <p class="text-white/50">Some things are better left unexplained. We create work that invites interpretation rather than demanding it.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Join Section -->
+        <div class="max-w-4xl mx-auto text-center border-t border-white/10 pt-20">
+            <h2 class="text-4xl font-display text-white tracking-wide mb-6">Ready to Join the Collective?</h2>
+            <p class="text-white/60 text-lg mb-8 max-w-2xl mx-auto">
+                If you feel drawn to the darkness, if shadows speak to your soul, then you may find your place among us.
+            </p>
+            <a href="apply.html" class="gothic-button">
+                Apply to Join
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-white/10 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <span class="text-white/50">𓋹</span>
+                <span class="font-display text-xs tracking-[0.25em] text-white/50 uppercase">
+                    GOTHTAG - May. 2025
+                </span>
+            </div>
+
+            <div class="flex gap-8">
+                <a href="https://discord.gg/gothtag" target="_blank" class="font-display text-xs tracking-[0.2em] text-white/30 hover:text-white transition-colors">
+                    Discord
+                </a>
+                <a href="https://www.instagram.com/goth.tag/" target="_blank" class="font-display text-xs tracking-[0.2em] text-white/30 hover:text-white transition-colors">
+                    Instagram
+                </a>
+                <a href="https://Linktr.ee/gothtag" target="_blank" class="font-display text-xs tracking-[0.2em] text-white/30 hover:text-white transition-colors">
+                    Linktr.ee
+                </a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

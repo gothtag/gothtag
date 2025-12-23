@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOTHTAG - Welcome to the Void</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="attached_assets/gothtag_black.png">
+    <link rel="shortcut icon" type="image/png" href="attached_assets/gothtag_black.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Source Sans Pro', 'sans-serif'],
+                        'body': ['Roboto', 'sans-serif']
+                    },
+                    colors: {
+                        background: 'hsl(0 0% 2%)',
+                        foreground: 'hsl(0 0% 96%)',
+                        primary: 'hsl(0 0% 96%)',
+                        secondary: 'hsl(0 0% 9%)',
+                        muted: 'hsl(0 0% 15%)',
+                        border: 'hsl(0 0% 20%)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #050505;
+            color: #f5f5f5;
+            cursor: url('attached_assets/cursor2.png') 1 1, auto;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        a, button, .nav-button, .gothic-button, [role="button"], .social-link, .creator-card {
+            cursor: url('attached_assets/cursor.png') 1 1, auto;
+        }
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+            filter: contrast(1.8) brightness(0.4);
+        }
+        h1, h2, h3 {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 40;
+            background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f5f5f5;
+        }
+        .nav-button {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: rgba(255,255,255,0.7);
+            background: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-button:hover, .nav-button.active {
+            background: white;
+            color: black;
+            transform: translateY(-1px);
+        }
+        .gothic-button {
+            padding: 1rem 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+            background: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .gothic-button:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+            cursor: url('attached_assets/cursor.png') 1 1, auto;
+        }
+        .hero-section {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 5rem 1.5rem;
+            position: relative;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(25px);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform, opacity;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .feature-card {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 2rem;
+            background: rgba(0,0,0,0.3);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .feature-card:hover {
+            border-color: rgba(255,255,255,0.3);
+            background: rgba(0,0,0,0.5);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+        .protected-image {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            pointer-events: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
+            touch-action: none;
+            -webkit-touch-callout: none;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Background Video -->
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="https://r2.guns.lol/cb266527-84f4-4c15-833c-8c6dc327af31.mp4" type="video/mp4">
+    </video>
+
+    <div class="bg-noise"></div>
+    <div class="bg-noise"></div>
+    <div class="vignette"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-sm pt-6 pb-4">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-center flex-wrap gap-4">
+            <a href="home.html" class="nav-button active">+ Home</a>
+            <a href="community.html" class="nav-button">+ Community</a>
+            <a href="faq.html" class="nav-button">+ FAQ</a>
+            <a href="socials.html" class="nav-button">+ Socials</a>
+            <a href="apply.html" class="nav-button">+ Apply</a>
+        </div>
+    </nav>
+
+    <div class="pt-20"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="max-w-4xl mx-auto text-center space-y-12 z-10">
+            <div class="fade-in">
+                <span class="block text-white/40 font-display text-sm md:text-base tracking-[0.5em] uppercase mb-6">
+                    Welcome to the Void
+                </span>
+                <div class="flex justify-center">
+                    <img src="attached_assets\tag.png" alt="GOTHTAG" class="max-w-xs md:max-w-sm lg:max-w-md h-auto filter drop-shadow-2xl protected-image" draggable="false">
+                </div>
+            </div>
+
+<p class="text-white/70 font-light text-lg md:text-xl max-w-2xl mx-auto leading-relaxed border-l border-r border-white/10 px-8 py-4 fade-in" style="animation-delay: 0.5s;">
+    A place for goth culture, art, music, and people who actually get it.
+    <br>
+    <span class="block italic text-white/40 text-base md:text-lg fade-in" style="animation-delay: 0.5s;">
+        A digital sanctuary.
+    </span>
+</p>
+
+            <div class="pt-8 fade-in" style="animation-delay: 0.8s;">
+                <a href="socials.html" class="gothic-button">
+                    Join the Cult
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-white/10 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <span class="text-white/50">𓋹</span>
+                <span class="font-display text-xs tracking-[0.25em] text-white/50 uppercase">
+                    GOTHTAG - May. 2025
+                </span>
+            </div>
+
+            <div class="flex gap-8">
+                <a href="https://discord.gg/gothtag" target="_blank" class="font-display text-xs tracking-[0.2em] text-white/30 hover:text-white transition-colors">
+                    Discord
+                </a>
+                <a href="https://www.instagram.com/goth.tag/" target="_blank" class="font-display text-xs tracking-[0.2em] text-white/30 hover:text-white transition-colors">
+                    Instagram
+                </a>
+                <a href="https://Linktr.ee/gothtag" target="_blank" class="font-display text-xs tracking-[0.2em] text-white/30 hover:text-white transition-colors">
+                    Linktr.ee
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Protection supplémentaire contre le drag de l'image
+        document.addEventListener('DOMContentLoaded', function() {
+            const protectedImage = document.querySelector('.protected-image');
+            if (protectedImage) {
+                protectedImage.addEventListener('dragstart', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+                protectedImage.addEventListener('contextmenu', function(e) {
+                    e.preventDefault();
+                    return false;
+                });
+            }
+        });
+    </script>
+</body>
+</html>

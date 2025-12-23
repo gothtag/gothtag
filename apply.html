@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOTHTAG - Apply to Join</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="attached_assets/gothtag_black.png">
+    <link rel="shortcut icon" type="image/png" href="attached_assets/gothtag_black.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'display': ['Roboto', 'sans-serif'],
+                        'body': ['Roboto', 'sans-serif']
+                    },
+                    colors: {
+                        background: 'hsl(0 0% 2%)',
+                        foreground: 'hsl(0 0% 96%)',
+                        primary: 'hsl(0 0% 96%)',
+                        secondary: 'hsl(0 0% 9%)',
+                        muted: 'hsl(0 0% 15%)',
+                        border: 'hsl(0 0% 20%)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #050505;
+            color: #f5f5f5;
+            cursor: url('attached_assets/cursor2.png') 1 1, auto;
+        }
+        h1, h2, h3 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+        }
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 40;
+            background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f5f5f5;
+        }
+        .nav-button {
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: rgba(255,255,255,0.7);
+            background: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-button:hover, .nav-button.active {
+            background: white;
+            color: black;
+            transform: translateY(-1px);
+        }
+        .form-input {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.75rem;
+            font-family: 'Exo', sans-serif;
+            transition: all 0.3s;
+            outline: none;
+        }
+        .form-input:focus {
+            border-color: rgba(255,255,255,0.5);
+        }
+        /* Custom Select Styling */
+        select.form-input {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.75rem center;
+            background-repeat: no-repeat;
+            background-size: 1rem;
+            padding-right: 2.5rem;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+        select.form-input option {
+            background: #1a1a1a;
+            color: white;
+            padding: 0.5rem;
+        }
+        select.form-input optgroup {
+            background: #2a2a2a;
+            color: rgba(255,255,255,0.7);
+            font-weight: bold;
+            padding: 0.25rem 0.75rem;
+        }
+        .form-textarea {
+            width: 100%;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 0.75rem;
+            font-family: 'Exo', sans-serif;
+            transition: all 0.3s;
+            outline: none;
+            resize: none;
+            min-height: 120px;
+        }
+        .form-textarea:focus {
+            border-color: rgba(255,255,255,0.5);
+        }
+        .form-label {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 0.875rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: white;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .submit-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 0.875rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+            background: transparent;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);            cursor: url('attached_assets/cursor.png') 1 1, auto;        }
+        /* Custom Radio Buttons */
+        input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            background: transparent;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            margin-right: 0.5rem;
+        }
+        input[type="radio"]:checked {
+            border-color: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.1);
+        }
+        input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: radioCheck 0.2s ease-in-out;
+        }
+        input[type="radio"]:hover {
+            border-color: rgba(255,255,255,0.6);
+            transform: scale(1.05);
+        }
+        @keyframes radioCheck {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        .success-message {
+            max-width: 32rem;
+            margin: 0 auto;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 3rem;
+            background: rgba(0,0,0,0.3);
+            position: relative;
+        }
+        .success-message::before,
+        .success-message::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 4px;
+            height: 4px;
+            border: 1px solid white;
+        }
+        .success-message::before {
+            left: 0;
+            border-right: none;
+            border-bottom: none;
+        }
+        .success-message::after {
+            right: 0;
+            border-left: none;
+            border-bottom: none;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(25px);
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            will-change: transform, opacity;
+        }
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+            filter: contrast(1.8) brightness(0.4);
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        a, button, .nav-button, .gothic-button, [role="button"], input[type="submit"], input[type="button"] {
+            cursor: url('attached_assets/cursor.png') 1 1, auto;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+    <!-- Background Video -->
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="https://r2.guns.lol/cb266527-84f4-4c15-833c-8c6dc327af31.mp4" type="video/mp4">
+    </video>
+
+    <div class="bg-noise"></div>
+    <div class="bg-noise"></div>
+    <div class="vignette"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 bg-black/50 backdrop-blur-sm pt-6 pb-4">
+        <div class="max-w-7xl mx-auto px-6 flex items-center justify-center flex-wrap gap-4">
+            <a href="home.html" class="nav-button">+ Home</a>
+            <a href="community.html" class="nav-button">+ Community</a>
+            <a href="faq.html" class="nav-button">+ FAQ</a>
+            <a href="socials.html" class="nav-button">+ Socials</a>
+            <a href="apply.html" class="nav-button active">+ Apply</a>
+        </div>
+    </nav>
+
+    <div class="pt-20"></div>
+
+    <main class="flex-1 flex items-center justify-center p-6 min-h-[80vh]">
+        <div class="w-full max-w-2xl">
+            <!-- Application Form -->
+            <div id="application-form" class="fade-in">
+                <div class="text-center mb-12">
+                    <span class="block text-white/40 font-display text-sm tracking-[0.4em] uppercase mb-4 fade-in">
+                        Moderator
+                    </span>
+                    <h1 class="text-5xl md:text-7xl font-display text-white tracking-wide mb-6 fade-in" style="animation-delay: 0.2s;">
+                        Application
+                    </h1>
+                    <p class="text-white/50 text-lg font-light fade-in" style="animation-delay: 0.4s;">
+                        Join our community as a moderator of GOTHTAG. Only the worthy shall pass.
+                    </p>
+                </div>
+
+                <form id="apply-form" class="space-y-6" action="https://formspree.io/f/mlgrorpn" method="POST">
+                    <div>
+                        <label class="form-label">1. Discord username: <span class="text-red-400">*</span></label>
+                        <input
+                            type="text"
+                            name="discord_username"
+                            required
+                            class="form-input"
+                            placeholder="Your Discord username"
+                        >
+                    </div>
+
+                    <div>
+                        <label class="form-label">2. Age: <span class="text-red-400">*</span></label>
+                        <input
+                            type="number"
+                            name="age"
+                            required
+                            min="18"
+                            class="form-input"
+                            placeholder="Your age"
+                        >
+                    </div>
+
+                    <div>
+                        <label class="form-label">3. Time zone & country: <span class="text-red-400">*</span></label>
+                        <select
+                            name="timezone_country"
+                            required
+                            class="form-input"
+                        >
+                            <option value="" disabled selected>Select your timezone</option>
+                            <!-- Africa -->
+                            <optgroup label="Africa">
+                                <option value="Africa/Cairo">Egypt (UTC+2)</option>
+                                <option value="Africa/Johannesburg">South Africa (UTC+2)</option>
+                                <option value="Africa/Lagos">Nigeria (UTC+1)</option>
+                                <option value="Africa/Nairobi">Kenya (UTC+3)</option>
+                                <option value="Africa/Casablanca">Morocco (UTC+1)</option>
+                                <option value="Africa/Algiers">Algeria (UTC+1)</option>
+                            </optgroup>
+                            <!-- Americas -->
+                            <optgroup label="Americas">
+                                <option value="America/New_York">Eastern Time (UTC-5/-4)</option>
+                                <option value="America/Chicago">Central Time (UTC-6/-5)</option>
+                                <option value="America/Denver">Mountain Time (UTC-7/-6)</option>
+                                <option value="America/Los_Angeles">Pacific Time (UTC-8/-7)</option>
+                                <option value="America/Anchorage">Alaska (UTC-9/-8)</option>
+                                <option value="Pacific/Honolulu">Hawaii (UTC-10)</option>
+                                <option value="America/Toronto">Toronto (UTC-5/-4)</option>
+                                <option value="America/Vancouver">Vancouver (UTC-8/-7)</option>
+                                <option value="America/Mexico_City">Mexico City (UTC-6/-5)</option>
+                                <option value="America/Sao_Paulo">São Paulo (UTC-3)</option>
+                                <option value="America/Buenos_Aires">Buenos Aires (UTC-3)</option>
+                                <option value="America/Lima">Lima (UTC-5)</option>
+                                <option value="America/Bogota">Bogotá (UTC-5)</option>
+                            </optgroup>
+                            <!-- Asia -->
+                            <optgroup label="Asia">
+                                <option value="Asia/Tokyo">Japan (UTC+9)</option>
+                                <option value="Asia/Shanghai">China (UTC+8)</option>
+                                <option value="Asia/Seoul">South Korea (UTC+9)</option>
+                                <option value="Asia/Singapore">Singapore (UTC+8)</option>
+                                <option value="Asia/Hong_Kong">Hong Kong (UTC+8)</option>
+                                <option value="Asia/Dubai">UAE (UTC+4)</option>
+                                <option value="Asia/Kolkata">India (UTC+5:30)</option>
+                                <option value="Asia/Bangkok">Thailand (UTC+7)</option>
+                                <option value="Asia/Jakarta">Indonesia (UTC+7)</option>
+                                <option value="Asia/Manila">Philippines (UTC+8)</option>
+                                <option value="Asia/Kuala_Lumpur">Malaysia (UTC+8)</option>
+                            </optgroup>
+                            <!-- Europe -->
+                            <optgroup label="Europe">
+                                <option value="Europe/London">London (UTC+0/+1)</option>
+                                <option value="Europe/Paris">Paris (UTC+1/+2)</option>
+                                <option value="Europe/Berlin">Berlin (UTC+1/+2)</option>
+                                <option value="Europe/Rome">Rome (UTC+1/+2)</option>
+                                <option value="Europe/Madrid">Madrid (UTC+1/+2)</option>
+                                <option value="Europe/Amsterdam">Amsterdam (UTC+1/+2)</option>
+                                <option value="Europe/Stockholm">Stockholm (UTC+1/+2)</option>
+                                <option value="Europe/Moscow">Moscow (UTC+3)</option>
+                                <option value="Europe/Istanbul">Istanbul (UTC+3)</option>
+                                <option value="Europe/Athens">Greece (UTC+2/+3)</option>
+                                <option value="Europe/Warsaw">Poland (UTC+1/+2)</option>
+                                <option value="Europe/Prague">Czech Republic (UTC+1/+2)</option>
+                                <option value="Europe/Vienna">Austria (UTC+1/+2)</option>
+                                <option value="Europe/Zurich">Switzerland (UTC+1/+2)</option>
+                            </optgroup>
+                            <!-- Oceania -->
+                            <optgroup label="Oceania">
+                                <option value="Australia/Sydney">Sydney (UTC+10/+11)</option>
+                                <option value="Australia/Melbourne">Melbourne (UTC+10/+11)</option>
+                                <option value="Australia/Perth">Perth (UTC+8)</option>
+                                <option value="Pacific/Auckland">New Zealand (UTC+12/+13)</option>
+                                <option value="Pacific/Fiji">Fiji (UTC+12)</option>
+                            </optgroup>
+                            <!-- Other -->
+                            <optgroup label="Other">
+                                <option value="UTC">UTC (Coordinated Universal Time)</option>
+                                <option value="GMT">GMT (Greenwich Mean Time)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="form-label">4. Are you able to enable and use 2FA on your account? <span class="text-red-400">*</span></label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="twofa" value="Yes" required>
+                                <span class="text-white/70">Yes</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="twofa" value="No" required>
+                                <span class="text-white/70">No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">5. How long have you been part of Goth Tag, and what is your experience here? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="experience_gothtag"
+                            required
+                            class="form-textarea"
+                            placeholder="Describe your time in the community..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">6. Tell us a bit about yourself and your personality:</label>
+                        <textarea
+                            name="about_yourself"
+                            class="form-textarea"
+                            placeholder="Share who you are..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">7. Are you introverted, extroverted, or somewhere in between? <span class="text-red-400">*</span></label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="personality_type" value="Introverted" required>
+                                <span class="text-white/70">Introverted</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="personality_type" value="Extroverted" required>
+                                <span class="text-white/70">Extroverted</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="personality_type" value="Ambivert" required>
+                                <span class="text-white/70">Ambivert</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">8. Hobbies, interests, or creative activities you enjoy: <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="hobbies"
+                            required
+                            class="form-textarea"
+                            placeholder="What do you enjoy doing?"
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">9. What does being goth mean to you personally? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="goth_definition"
+                            required
+                            class="form-textarea"
+                            placeholder="Your personal definition of goth..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">10. How would you define respect, and how do you apply it in your daily life? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="respect_definition"
+                            required
+                            class="form-textarea"
+                            placeholder="Your understanding of respect..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">11. Are you easily offended? If so, please explain why: <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="easily_offended"
+                            required
+                            class="form-textarea"
+                            placeholder="Explain your sensitivity to offense..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">12. How active are you on Discord, and how often do you engage in servers you are part of? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="discord_activity"
+                            required
+                            class="form-textarea"
+                            placeholder="Describe your Discord activity..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">13. How many servers are you currently in, and which ones do you actively participate in? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="server_count"
+                            required
+                            class="form-textarea"
+                            placeholder="List your server memberships..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">14. Have you ever had a moderator or admin role in a Discord server before? If yes, describe your experience: <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="mod_experience"
+                            required
+                            class="form-textarea"
+                            placeholder="Describe your moderation experience..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">15. How do you view Goth Tag and the way it is managed? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="gothtag_view"
+                            required
+                            class="form-textarea"
+                            placeholder="Your view on Goth Tag..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">16. Name three rules of the server that stand out to you and explain why they are important: <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="important_rules"
+                            required
+                            class="form-textarea"
+                            placeholder="Three important rules and why..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">17. What do you consider to be misuse or abuse of moderator powers? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="power_misuse"
+                            required
+                            class="form-textarea"
+                            placeholder="Define moderator power misuse..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">18. When do you think a moderator should escalate actions beyond a warning? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="escalation_timing"
+                            required
+                            class="form-textarea"
+                            placeholder="When to escalate moderation actions..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">19. How would you respond if someone broke the rules?</label>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-white/70 mb-2">・Minor offense</label>
+                                <textarea
+                                    name="minor_offense_response"
+                                    class="form-textarea"
+                                    placeholder="How would you handle a minor offense?"
+                                ></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-white/70 mb-2">・Major offense</label>
+                                <textarea
+                                    name="major_offense_response"
+                                    class="form-textarea"
+                                    placeholder="How would you handle a major offense?"
+                                ></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-white/70 mb-2">・If it's a staff member</label>
+                                <textarea
+                                    name="staff_offense_response"
+                                    class="form-textarea"
+                                    placeholder="How would you handle a staff member breaking rules?"
+                                ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="form-label">20. How would you encourage activity and participation in the server as a moderator? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="activity_encouragement"
+                            required
+                            class="form-textarea"
+                            placeholder="Ideas for encouraging participation..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">21. How would you handle conflicts or disputes between members? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="conflict_handling"
+                            required
+                            class="form-textarea"
+                            placeholder="Your approach to member conflicts..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">22. How would you react if a member ignored your moderation multiple times? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="ignored_moderation"
+                            required
+                            class="form-textarea"
+                            placeholder="Handling repeated rule violations..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">23. Do you have ideas to improve the atmosphere, aesthetics, or community engagement on Goth Tag? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="improvement_ideas"
+                            required
+                            class="form-textarea"
+                            placeholder="Your ideas for improvement..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">24. Why do you want to join the moderation team? <span class="text-red-400">*</span></label>
+                        <textarea
+                            name="motivation"
+                            required
+                            class="form-textarea"
+                            placeholder="Your motivation for becoming a moderator..."
+                        ></textarea>
+                    </div>
+
+                    <div>
+                        <label class="form-label">25. Are you willing to collaborate with other staff and follow server policies consistently? <span class="text-red-400">*</span></label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="collaboration_willingness" value="Yes" required>
+                                <span class="text-white/70">Yes</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="collaboration_willingness" value="No" required>
+                                <span class="text-white/70">No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-button">
+                        Submit Moderator Application
+                    </button>
+                </form>
+
+                <div class="text-center mt-8 text-white/40 text-sm">
+                    <p>By submitting this moderator application, you acknowledge that:</p>
+                    <ul class="mt-2 space-y-1 text-xs">
+                        <li>• You are 18 years or older</li>
+                        <li>• You understand moderator responsibilities</li>
+                        <li>• Application review may take time</li>
+                        <li>• We will contact you if accepted</li>
+                        <li>• All information provided is accurate</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Success Message (Hidden by default) -->
+            <div id="success-message" class="success-message fade-in" style="display: none;">
+                <div class="relative">
+                    <div class="absolute top-0 left-0 w-4 h-4 border-t border-l border-white"></div>
+                    <div class="absolute bottom-0 right-0 w-4 h-4 border-b border-r border-white"></div>
+
+                    <h2 class="text-3xl font-display tracking-widest text-white mb-6">Application Received</h2>
+                    <p class="text-white/70 font-light leading-relaxed mb-6">
+                        Your moderator application has been submitted to the Elders. The Council will review your candidacy.
+                        Only the most worthy will be chosen to wield the shadows of moderation.
+                        Await our judgment in silence.
+                    </p>
+                    <a href="home.html" class="inline-block px-6 py-3 border border-white/30 font-display text-sm tracking-[0.2em] uppercase transition-all duration-300 hover:bg-white hover:text-black">
+                        Return Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full border-t border-white/10 py-12 mt-auto">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-4">
+                <span class="text-white/50">𓋹</span>
+                <span class="font-display text-xs tracking-[0.25em] text-white/50 uppercase">
+                    GOTHTAG - May. 2025
+                </span>
+            </div>
+
+            <div class="flex gap-8">
+                <a href="https://discord.gg/gothtag" target="_blank" class="font-display text-xs tracking-[0.2em] text-white/30 hover:text-white transition-colors">
+                    Discord
+                </a>
+                <a href="https://www.instagram.com/goth.tag/" target="_blank" class="font-display text-xs tracking-[0.2em] text-white/30 hover:text-white transition-colors">
+                    Instagram
+                </a>
+                <a href="https://Linktr.ee/gothtag" target="_blank" class="font-display text-xs tracking-[0.2em] text-white/30 hover:text-white transition-colors">
+                    Linktr.ee
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Formspree will handle the form submission and show success message automatically
+        // No additional JavaScript needed
+    </script>
+</body>
+</html>

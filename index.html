@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOTHTAG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="attached_assets/gothtag_black.png">
+    <link rel="shortcut icon" type="image/png" href="attached_assets/gothtag_black.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000000;
+            color: white;
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .glow-logo {
+            max-width: 500px;
+            width: 80%;
+            height: auto;
+            animation: glow 2s ease-in-out infinite alternate;
+            margin-bottom: 2rem;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2))
+                    drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2))
+                        drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+            }
+            to {
+                filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.4))
+                        drop-shadow(0 0 15px rgba(255, 255, 255, 0.4))
+                        drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+            }
+        }
+
+        .background-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.3;
+            filter: contrast(1.8) brightness(0.4);
+        }
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 40;
+            background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%);
+        }
+
+        @media (max-width: 768px) {
+            .glow-logo {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body onclick="enterSite()">
+    <!-- Background Video -->
+    <video class="background-video" autoplay muted loop playsinline>
+        <source src="https://r2.guns.lol/cb266527-84f4-4c15-833c-8c6dc327af31.mp4" type="video/mp4">
+    </video>
+
+    <div class="bg-noise"></div>
+    <div class="bg-noise"></div>
+    <div class="vignette"></div>
+
+    <div class="content">
+        <img src="attached_assets/tag.png" class="glow-logo" alt="GOTHTAG">
+    </div>
+
+    <script>
+        function enterSite() {
+            window.location.href = 'home.html';
+        }
+    </script>
+</body>
+</html>

@@ -9,9 +9,10 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">
       <Navigation />
+      <div className="pt-20" />
       
       {/* Hero Section */}
-      <section className="relative flex-1 flex flex-col items-center justify-center py-32 px-6 min-h-[90vh]">
+      <section className="relative flex-1 flex flex-col items-center justify-center py-20 px-6 min-h-[80vh]">
         <div className="max-w-4xl mx-auto text-center space-y-12 z-10">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}

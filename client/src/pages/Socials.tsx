@@ -21,9 +21,9 @@ const socialLinks = [
     borderColor: "border-pink-500/40",
   },
   {
-    name: "Linktree",
+    name: "Linktr.ee",
     description: "All links in one place.",
-    url: "https://linktr.ee/gothtag",
+    url: "https://Linktr.ee/gothtag",
     icon: ExternalLink,
     gradient: "from-cyan-500/20 to-blue-500/20",
     borderColor: "border-cyan-500/40",
@@ -55,8 +55,9 @@ export default function Socials() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Navigation />
+      <div className="pt-20" />
       
-      <main className="flex-1 pt-32 pb-20 px-6">
+      <main className="flex-1 pt-12 pb-20 px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -74,7 +75,7 @@ export default function Socials() {
           </p>
         </motion.div>
 
-        {/* Social links grid - Linktree style */}
+        {/* Social links grid - Linktr.ee style */}
         <div className="max-w-lg mx-auto space-y-4 mb-20">
           {socialLinks.map((link, index) => {
             const Icon = link.icon;
@@ -94,7 +95,7 @@ export default function Socials() {
                 
                 <div className="relative z-10 flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 flex items-center justify-center rounded-full border border-white/20 group-hover:border-white/50 transition-colors">
+                    <div className="w-6 h-6 flex items-center justify-center rounded-full border border-white/20 group-hover:border-white/50 transition-colors">
                       <Icon className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
                     </div>
                     <div className="text-left">
