@@ -370,7 +370,7 @@
                     </p>
                 </div>
 
-                <form id="apply-form" class="space-y-6" action="https://formspree.io/f/mlgrorpn" method="POST">
+                <form id="apply-form" class="space-y-6">
                     <div>
                         <label class="form-label">1. Discord username: <span class="text-red-400">*</span></label>
                         <input
@@ -791,8 +791,85 @@
     </footer>
 
     <script>
-        // Formspree will handle the form submission and show success message automatically
-        // No additional JavaScript needed
+        const WEBHOOK_URL = 'https://discord.com/api/webhooks/1453121957825614006/g1668hWVomlplslxY6T-XTop6ePT1_cgTlMripPHhdwOIbSv5A-YjTRpowxoah7FKQJy';
+        
+        document.getElementById('apply-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Combiner la question 19 en un seul champ pour économiser de l'espace
+            const question19Response = `**・Minor offense**\n${(data.minor_offense_response || 'N/A').substring(0, 300)}\n\n**・Major offense**\n${(data.major_offense_response || 'N/A').substring(0, 300)}\n\n**・If it's a staff member**\n${(data.staff_offense_response || 'N/A').substring(0, 300)}`;
+            
+            // Create Discord embed with all questions in one
+            const embed = {
+                title: "🦇 New Moderator Application",
+                color: 0x000000,
+                thumbnail: {
+                    url: "https://i.imgur.com/t7OEIgS.png"
+                },
+                fields: [
+                    { name: "**1. Discord username:**", value: `\n${data.discord_username || 'N/A'}`, inline: false },
+                    { name: "**2. Age:**", value: `\n${data.age || 'N/A'}`, inline: false },
+                    { name: "**3. Time zone & country:**", value: `\n${data.timezone_country || 'N/A'}`, inline: false },
+                    { name: "**4. Are you able to enable and use 2FA on your account?**", value: `\n${data.twofa || 'N/A'}`, inline: false },
+                    { name: "**5. How long have you been part of Goth Tag, and what is your experience here?**", value: `\n${(data.experience_gothtag || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**6. Tell us a bit about yourself and your personality:**", value: `\n${(data.about_yourself || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**7. Are you introverted, extroverted, or somewhere in between?**", value: `\n${data.personality_type || 'N/A'}`, inline: false },
+                    { name: "**8. Hobbies, interests, or creative activities you enjoy:**", value: `\n${(data.hobbies || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**9. What does being goth mean to you personally?**", value: `\n${(data.goth_definition || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**10. How would you define respect, and how do you apply it in your daily life?**", value: `\n${(data.respect_definition || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**11. Are you easily offended? If so, please explain why:**", value: `\n${(data.easily_offended || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**12. How active are you on Discord, and how often do you engage in servers you are part of?**", value: `\n${(data.discord_activity || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**13. How many servers are you currently in, and which ones do you actively participate in?**", value: `\n${(data.server_count || 'N/A').substring(0, 1024)}`, inline: false }
+                ],
+                timestamp: new Date().toISOString(),
+                footer: { text: "GOTHTAG Applications • Part 1/3" }
+            };
+            
+            // Second embed for remaining questions
+            const embed2 = {
+                color: 0x000000,
+                fields: [
+                    { name: "**14. Have you ever had a moderator or admin role in a Discord server before? If yes, describe your experience:**", value: `\n${(data.mod_experience || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**15. How do you view Goth Tag and the way it is managed?**", value: `\n${(data.gothtag_view || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**16. Name three rules of the server that stand out to you and explain why they are important:**", value: `\n${(data.important_rules || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**17. What do you consider to be misuse or abuse of moderator powers?**", value: `\n${(data.power_misuse || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**18. When do you think a moderator should escalate actions beyond a warning?**", value: `\n${(data.escalation_timing || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**19. How would you respond if someone broke the rules?**", value: `\n${question19Response.substring(0, 1024)}`, inline: false },
+                    { name: "**20. How would you encourage activity and participation in the server as a moderator?**", value: `\n${(data.activity_encouragement || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**21. How would you handle conflicts or disputes between members?**", value: `\n${(data.conflict_handling || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**22. How would you react if a member ignored your moderation multiple times?**", value: `\n${(data.ignored_moderation || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**23. Do you have ideas to improve the atmosphere, aesthetics, or community engagement on Goth Tag?**", value: `\n${(data.improvement_ideas || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**24. Why do you want to join the moderation team?**", value: `\n${(data.motivation || 'N/A').substring(0, 1024)}`, inline: false },
+                    { name: "**25. Are you willing to collaborate with other staff and follow server policies consistently?**", value: `\n${data.collaboration_willingness || 'N/A'}`, inline: false }
+                ],
+                footer: { text: "GOTHTAG Applications • Part 2/2" }
+            };
+            
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        content: '<@&1425408351159975988> <@&1425408529451319296> <@&1425408595847282809>',
+                        username: data.discord_username || 'New Application',
+                        embeds: [embed, embed2] 
+                    })
+                });
+                
+                if (response.ok) {
+                    document.getElementById('application-form').style.display = 'none';
+                    document.getElementById('success-message').style.display = 'block';
+                } else {
+                    alert('Error submitting application. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error submitting application. Please try again.');
+            }
+        });
     </script>
 </body>
 </html>
