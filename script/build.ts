@@ -50,9 +50,7 @@ async function buildAll() {
     "ey.html",
   ];
 
-  await Promise.all(
-    staticHtmlFiles.map((file) => cp(file, `dist/${file}`)),
-  );
+  await Promise.all(staticHtmlFiles.map((file) => cp(file, `dist/${file}`)));
 
   console.log("copying assets...");
   await cp("attached_assets", "dist/attached_assets", { recursive: true });

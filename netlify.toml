@@ -1,0 +1,18 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Optional: route SPA to index.html
+[[redirects]]
+  from = "/app/*"
+  to = "/index.html"
+  status = 200
+
+# Security headers via Netlify config (alternative to _headers)
+[headers]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "no-referrer"
+    Permissions-Policy = "interest-cohort=()"
