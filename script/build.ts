@@ -1,6 +1,6 @@
 import { build as esbuild } from "esbuild";
 import { build as viteBuild } from "vite";
-import { rm, readFile } from "fs/promises";
+import { rm, readFile, cp } from "fs/promises";
 
 // server deps to bundle to reduce openat(2) syscalls
 // which helps cold start times
@@ -37,6 +37,25 @@ async function buildAll() {
 
   console.log("building client...");
   await viteBuild();
+
+  console.log("copying static html...");
+  const staticHtmlFiles = [
+    "index.html",
+    "home.html",
+    "community.html",
+    "faq.html",
+    "socials.html",
+    "apply.html",
+    "me.html",
+    "ey.html",
+  ];
+
+  await Promise.all(
+    staticHtmlFiles.map((file) => cp(file, `dist/${file}`)),
+  );
+
+  console.log("copying assets...");
+  await cp("attached_assets", "dist/attached_assets", { recursive: true });
 
   console.log("building server...");
   const pkg = JSON.parse(await readFile("package.json", "utf-8"));
