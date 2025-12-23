@@ -77,3 +77,5 @@ npm run build
 
 - Repository: https://github.com/gothtag/gothtag
 - Issues: https://github.com/gothtag/gothtag/issues
+
+SSH: configured for 4po
