@@ -36,16 +36,17 @@ async function buildAll() {
   await rm('dist', { recursive: true, force: true });
 
   console.log('building client...');
-  await viteBuild();
+  await viteBuild();  // Creates dist/public/index.html (React SPA)
 
   console.log('copying static HTML files...');
-  // Copy static HTML files to dist
+  // Copy landing page as root index.html
+  await cp('index.html', 'dist/index.html');
+  // Copy other static HTML files
   await cp('home.html', 'dist/home.html');
   await cp('community.html', 'dist/community.html');
   await cp('faq.html', 'dist/faq.html');
   await cp('socials.html', 'dist/socials.html');
   await cp('apply.html', 'dist/apply.html');
-  await cp('index.html', 'dist/landing.html');
   await cp('me.html', 'dist/me.html');
   await cp('ey.html', 'dist/ey.html');
   
