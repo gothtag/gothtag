@@ -170,14 +170,14 @@
             cursor: url('attached_assets/cursor.png') 1 1, auto;
         }        .fade-in {
             opacity: 0;
-            transform: translateY(25px);
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transform: translateY(-25px);
+            animation: fadeInDown 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             will-change: transform, opacity;
         }
         .background-video {
             position: fixed;
             top: 0;
-            left: 0;
+            left: 0;    
             width: 100vw;
             height: 100vh;
             object-fit: cover;
@@ -185,10 +185,10 @@
             opacity: 0.3;
             filter: contrast(1.8) brightness(0.4);
         }
-        @keyframes fadeInUp {
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
-                transform: translateY(25px);
+                transform: translateY(-25px);
             }
             to {
                 opacity: 1;
@@ -242,7 +242,7 @@
                 Community
             </h1>
             <p class="text-white/50 mt-6 text-lg font-light fade-in" style="animation-delay: 0.4s;">
-                A collective of visionaries bound by darkness and united in silence.
+                A place to connect, create, and enjoy together.
             </p>
         </div>
 
@@ -291,7 +291,7 @@ The community is open, chill, and welcoming from baby-bats to longtime goths, al
         <div class="max-w-6xl mx-auto mb-20">
             <h2 class="text-4xl font-display text-white tracking-wide text-center mb-12 fade-in" style="animation-delay: 1s;">Our Values</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="member-card fade-in">
+                <div class="member-card fade-in" style="animation-delay: 1.2s;">
                     <div class="text-4xl mb-4">
                         <img src="https://www.worldgothday.com/images/WGDlogo.png" alt="" class="w-9 h-9 mx-auto">
                     </div>
@@ -299,7 +299,7 @@ The community is open, chill, and welcoming from baby-bats to longtime goths, al
                     <p class="text-white/40">Goth culture is wide. There’s room for everyone old-school goths, new blood, alts, and the curious.</p>
                 </div>
 
-                <div class="member-card fade-in" style="animation-delay: 0.2s;">
+                <div class="member-card fade-in" style="animation-delay: 1.4s;">
                     <div class="text-4xl mb-4">
                         <img src="https://www.worldgothday.com/images/WGDlogo.png" alt="" class="w-9 h-9 mx-auto">
                     </div>
@@ -307,7 +307,7 @@ The community is open, chill, and welcoming from baby-bats to longtime goths, al
                     <p class="text-white/40">Safe space, chill vibes, no toxicity. Be yourself, grow at your own pace.    </p>
                 </div>
 
-                <div class="member-card fade-in" style="animation-delay: 0.4s;">
+                <div class="member-card fade-in" style="animation-delay: 1.6s;">
                     <div class="text-4xl mb-4">
                         <img src="https://www.worldgothday.com/images/WGDlogo.png" alt="" class="w-9 h-9 mx-auto">
                     </div>
@@ -319,11 +319,11 @@ The community is open, chill, and welcoming from baby-bats to longtime goths, al
 
         <!-- Join Section -->
         <div class="max-w-4xl mx-auto text-center border-t border-white/10 pt-20">
-            <h2 class="text-4xl font-display text-white tracking-wide mb-6">Ready to Join the Collective?</h2>
-            <p class="text-white/60 text-lg mb-8 max-w-2xl mx-auto">
+            <h2 class="text-4xl font-display text-white tracking-wide mb-6 fade-in" style="animation-delay: 1.8s;">Ready to Join the Collective?</h2>
+            <p class="text-white/60 text-lg mb-8 max-w-2xl mx-auto fade-in" style="animation-delay: 2s;">
                 Moderator applications are open for active and serious members who want to help run the server.
             </p>
-            <a href="apply.html" class="gothic-button">
+            <a href="apply.html" class="gothic-button fade-in" style="animation-delay: 2.2s;">
                 Join the Staff
             </a>
         </div>
