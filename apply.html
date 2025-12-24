@@ -368,6 +368,12 @@
                     <p class="text-white/50 text-lg font-light fade-in" style="animation-delay: 0.4s;">
                         Join our community as a moderator of GOTHTAG. Only the worthy shall pass.
                     </p>
+                    
+                    <!-- Cooldown Warning Message -->
+                    <div id="cooldown-warning" class="mt-8 p-6 border-2 border-white/20 bg-white/5 rounded-lg" style="display: none;">
+                        <p class="text-white/70 font-bold text-lg mb-2">⏰ Application Cooldown Active</p>
+                        <p id="cooldown-message" class="text-white/60 text-sm">You must wait before submitting another application.</p>
+                    </div>
                 </div>
 
                 <form id="apply-form" class="space-y-6">
@@ -379,7 +385,10 @@
                             required
                             class="form-input"
                             placeholder="Your Discord username"
+                            pattern="[a-zA-Z0-9_.]+|@[a-zA-Z0-9_.]+$"
+                            title="Discord username (letters, numbers, underscores, and periods only. No spaces or special characters)"
                         >
+                        <p class="text-white/40 text-xs mt-2">Only letters, numbers, underscores (_), and periods (.) are allowed</p>
                     </div>
 
                     <div>
@@ -389,6 +398,8 @@
                             name="age"
                             required
                             min="18"
+                            max="99"
+                            maxlength="2"
                             class="form-input"
                             placeholder="Your age"
                         >
@@ -737,7 +748,7 @@
                 <div class="text-center mt-8 text-white/40 text-sm">
                     <p>By submitting this moderator application, you acknowledge that:</p>
                     <ul class="mt-2 space-y-1 text-xs">
-                        <li>• You are 18 years or older</li>
+                        <li>• You are 16 years or older</li>
                         <li>• You understand moderator responsibilities</li>
                         <li>• Application review may take time</li>
                         <li>• We will contact you if accepted</li>
@@ -792,6 +803,82 @@
 
     <script>
         const WEBHOOK_URL = 'https://discord.com/api/webhooks/1453121957825614006/g1668hWVomlplslxY6T-XTop6ePT1_cgTlMripPHhdwOIbSv5A-YjTRpowxoah7FKQJy';
+        const COOLDOWN_HOURS = 24;
+        const COOLDOWN_MS = COOLDOWN_HOURS * 60 * 60 * 1000; // 24 heures en millisecondes
+        
+        // Fonction pour désactiver complètement le formulaire
+        function disableForm() {
+            const form = document.getElementById('apply-form');
+            const allInputs = form.querySelectorAll('input, textarea, select, button');
+            
+            allInputs.forEach(element => {
+                element.disabled = true;
+                element.style.opacity = '0.5';
+                element.style.cursor = 'not-allowed';
+                element.style.pointerEvents = 'none';
+            });
+        }
+        
+        // Fonction pour afficher le message de cooldown
+        function showCooldownMessage(timeRemaining) {
+            const warning = document.getElementById('cooldown-warning');
+            const message = document.getElementById('cooldown-message');
+            
+            const hours = Math.floor(timeRemaining / (60 * 60 * 1000));
+            const minutes = Math.floor((timeRemaining % (60 * 60 * 1000)) / (60 * 1000));
+            
+            message.textContent = `You must wait ${hours}h ${minutes}min before submitting another application.`;
+            warning.style.display = 'block';
+        }
+        
+        // Fonction pour vérifier et gérer le cooldown
+        function checkCooldown() {
+            const lastSubmit = localStorage.getItem('lastApplicationSubmit');
+            
+            if (lastSubmit) {
+                const timeSinceSubmit = Date.now() - parseInt(lastSubmit);
+                
+                if (timeSinceSubmit < COOLDOWN_MS) {
+                    const timeRemaining = COOLDOWN_MS - timeSinceSubmit;
+                    disableForm();
+                    showCooldownMessage(timeRemaining);
+                    
+                    // Mettre à jour le temps restant chaque minute
+                    const updateInterval = setInterval(() => {
+                        const newTimeRemaining = COOLDOWN_MS - (Date.now() - parseInt(lastSubmit));
+                        
+                        if (newTimeRemaining <= 0) {
+                            clearInterval(updateInterval);
+                            localStorage.removeItem('lastApplicationSubmit');
+                            window.location.reload(); // Recharger la page pour réactiver le formulaire
+                        } else {
+                            showCooldownMessage(newTimeRemaining);
+                        }
+                    }, 60000); // Mettre à jour chaque minute
+                }
+            }
+        }
+        
+        // Vérifier le cooldown au chargement de la page
+        checkCooldown();
+        
+        // Bloquer les caractères spéciaux dans le champ Discord username en temps réel
+        const usernameInput = document.querySelector('input[name="discord_username"]');
+        usernameInput.addEventListener('input', (e) => {
+            // Permettre uniquement: lettres, chiffres, underscore, point
+            e.target.value = e.target.value.replace(/[^a-zA-Z0-9_.@]/g, '');
+        });
+        
+        // Limiter l'âge à 2 chiffres maximum
+        const ageInput = document.querySelector('input[name="age"]');
+        ageInput.addEventListener('input', (e) => {
+            // Permettre uniquement les chiffres
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            // Limiter à 2 chiffres
+            if (e.target.value.length > 2) {
+                e.target.value = e.target.value.slice(0, 2);
+            }
+        });
         
         document.getElementById('apply-form').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -804,7 +891,7 @@
             
             // Create Discord embed with all questions in one
             const embed = {
-                title: "🦇 New Moderator Application",
+                title: "╰┈➤ New Moderator Application",
                 color: 0x000000,
                 thumbnail: {
                     url: "https://i.imgur.com/t7OEIgS.png"
@@ -860,6 +947,9 @@
                 });
                 
                 if (response.ok) {
+                    // Enregistrer le timestamp de la soumission pour activer le cooldown
+                    localStorage.setItem('lastApplicationSubmit', Date.now().toString());
+                    
                     document.getElementById('application-form').style.display = 'none';
                     document.getElementById('success-message').style.display = 'block';
                 } else {
