@@ -25,11 +25,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
+    <link rel="preload" as="image" href="/attached_assets/favicon.png">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://gothtag.com/attached_assets/favicon.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/attached_assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/attached_assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/attached_assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/attached_assets/favicon.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://gothtag.com/attached_assets/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/attached_assets/favicon.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/attached_assets/favicon.png">
     
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -269,6 +273,31 @@
             animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             will-change: transform, opacity;
         }
+        .particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 50%;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -474,8 +503,8 @@
             document.body.appendChild(particle);
             setTimeout(() => particle.remove(), 18000);
         }
-        setInterval(createParticle, 1800);
-        for(let i = 0; i < 4; i++) setTimeout(createParticle, i * 600);
+        setInterval(createParticle, 2200);
+        for(let i = 0; i < 3; i++) setTimeout(createParticle, i * 700);
     </script>
 </body>
 </html>

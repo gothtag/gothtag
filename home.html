@@ -25,11 +25,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <!-- Favicon -->
+    <link rel="preload" as="image" href="/attached_assets/favicon.png">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="192x192" href="https://gothtag.com/attached_assets/favicon.png">
-    <link rel="icon" type="image/png" sizes="48x48" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/attached_assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/attached_assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/attached_assets/favicon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/attached_assets/favicon.png">
     <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="192x192" href="https://gothtag.com/attached_assets/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/attached_assets/favicon.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="/attached_assets/favicon.png">
     
     <!-- Schema.org -->
     <script type="application/ld+json">
@@ -507,19 +511,19 @@
                 particle.className = 'particle';
                 particle.style.left = Math.random() * window.innerWidth + 'px';
                 particle.style.bottom = '0';
-                particle.style.animation = `float ${10 + Math.random() * 15}s linear`;
-                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.animation = `float ${6 + Math.random() * 8}s linear`;
+                particle.style.animationDelay = Math.random() * 2 + 's';
                 document.body.appendChild(particle);
 
                 setTimeout(() => {
                     particle.remove();
-                }, 25000);
+                }, 14000);
             }
 
-            // Generate particles periodically
-            setInterval(createParticle, 1200);
-            for(let i = 0; i < 5; i++) {
-                setTimeout(createParticle, i * 400);
+            // Generate particles periodically (reduced frequency for performance)
+            setInterval(createParticle, 2000);
+            for(let i = 0; i < 3; i++) {
+                setTimeout(createParticle, i * 600);
             }
 
             // Parallax effect on mouse move
