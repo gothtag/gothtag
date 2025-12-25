@@ -8,10 +8,10 @@
 /attached_assets/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Cache favicon files aggressively
-/favicon.ico
+# Cache x files aggressively
+/x.ico
   Cache-Control: public, max-age=31536000, immutable
-/attached_assets/favicon.png
+/attached_assets/x.png
   Cache-Control: public, max-age=31536000, immutable
 
 # Cache fonts

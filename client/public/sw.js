@@ -1,17 +1,17 @@
-// Service Worker for aggressive favicon caching
+// Service Worker for aggressive x caching
 const CACHE_NAME = 'gothtag-v1';
-const FAVICON_CACHE = 'favicon-cache-v1';
+const x_CACHE = 'x-cache-v1';
 
 // Resources to cache immediately
 const urlsToCache = [
-  '/attached_assets/favicon.png',
-  '/favicon.ico'
+  '/attached_assets/x.png',
+  '/x.ico'
 ];
 
-// Install event - cache favicon
+// Install event - cache x
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(FAVICON_CACHE)
+    caches.open(x_CACHE)
       .then((cache) => cache.addAll(urlsToCache))
       .then(() => self.skipWaiting())
   );
@@ -23,7 +23,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
-          if (cacheName !== CACHE_NAME && cacheName !== FAVICON_CACHE) {
+          if (cacheName !== CACHE_NAME && cacheName !== x_CACHE) {
             return caches.delete(cacheName);
           }
         })
@@ -32,12 +32,12 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch event - serve from cache for favicon
+// Fetch event - serve from cache for x
 self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   
-  // Cache-first strategy for favicon
-  if (url.pathname.includes('favicon')) {
+  // Cache-first strategy for x
+  if (url.pathname.includes('x')) {
     event.respondWith(
       caches.match(event.request)
         .then((response) => {
@@ -49,7 +49,7 @@ self.addEventListener('fetch', (event) => {
               return response;
             }
             const responseToCache = response.clone();
-            caches.open(FAVICON_CACHE).then((cache) => {
+            caches.open(x_CACHE).then((cache) => {
               cache.put(event.request, responseToCache);
             });
             return response;
