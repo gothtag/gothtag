@@ -46,6 +46,8 @@ async function buildAll() {
     "faq.html",
     "socials.html",
     "apply.html",
+    "404.html",
+    "team.html",
     "me.html",
     "ey.html",
     "7.html",
