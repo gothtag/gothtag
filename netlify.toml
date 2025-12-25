@@ -2,7 +2,7 @@
   command = "npm run build"
   publish = "dist"
 
-# SPA Routing - All routes go to React app
+# SPA Routing - All routes to React app
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -20,6 +20,12 @@
   to = "https://gothtag.com/:splat"
   status = 301
   force = true
+
+# Optional: route SPA to index.html
+[[redirects]]
+  from = "/app/*"
+  to = "/index.html"
+  status = 200
 
 # Security headers via Netlify config (alternative to _headers)
 [[headers]]
