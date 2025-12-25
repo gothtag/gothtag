@@ -31,6 +31,15 @@
     <link rel="icon" type="image/png" href="attached_assets/favicon.png?v=1">
     <link rel="apple-touch-icon" href="attached_assets/favicon.png?v=1">
     
+    <script>
+      // Register Service Worker for aggressive favicon caching
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=UnifrakturMaguntia&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
@@ -46,7 +55,13 @@
       "image": "https://images.guns.lol/262084fcb2a12da1058383308f51e2f4ea6315db/hk31O9.png",
       "logo": "https://gothtag.com/attached_assets/favicon.png"
     }
+
+
     </script>
+
+ <link rel="icon" type="image/png" href="attached_assets/favicon.png?v=1">
+  <link rel="apple-touch-icon" href="attached_assets/favicon.png?v=1">
+
   </head>
   <body>
     <div id="root"></div>

@@ -243,6 +243,11 @@
             border-bottom-color: white;
         }
     </style>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        }
+    </script>
 </head>
 <body>
     <!-- Background Video -->

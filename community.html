@@ -279,6 +279,11 @@
             }
         }
     </style>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+        }
+    </script>
 </head>
 <body class="min-h-screen flex flex-col">
     <!-- Background Video -->
