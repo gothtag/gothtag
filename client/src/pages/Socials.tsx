@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { Particles } from "@/components/Particles";
 import { motion } from "framer-motion";
 import { MessageCircle, ExternalLink, Instagram, Music } from "lucide-react";
 
@@ -54,6 +55,7 @@ const creators = [
 export default function Socials() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <Particles />
       <Navigation />
       <div className="pt-20" />
       

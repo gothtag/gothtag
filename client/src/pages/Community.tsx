@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { GothicCard } from "@/components/GothicCard";
+import { Particles } from "@/components/Particles";
 import { Scroll, Users, Crown, Eye } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -23,6 +24,7 @@ export default function Community() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <Particles />
       <Navigation />
       <div className="pt-20" />
       

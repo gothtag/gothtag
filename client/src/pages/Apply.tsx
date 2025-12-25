@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { GothicButton } from "@/components/GothicButton";
+import { Particles } from "@/components/Particles";
 import { useCreateApplication } from "@/hooks/use-applications";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -31,6 +32,7 @@ export default function Apply() {
   if (isSuccess) {
     return (
       <div className="min-h-screen flex flex-col bg-background">
+        <Particles />
         <Navigation />
         <div className="pt-20" />
         <main className="flex-1 flex items-center justify-center p-6">
@@ -59,6 +61,7 @@ export default function Apply() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <Particles />
       <Navigation />
       <div className="pt-20" />
       

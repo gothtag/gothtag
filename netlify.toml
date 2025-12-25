@@ -2,6 +2,12 @@
   command = "npm run build"
   publish = "dist"
 
+# SPA Routing - All routes go to React app
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
 # Force HTTPS - Redirect HTTP to HTTPS
 [[redirects]]
   from = "http://gothtag.com/*"
@@ -15,17 +21,35 @@
   status = 301
   force = true
 
-# Optional: route SPA to index.html
-[[redirects]]
-  from = "/app/*"
-  to = "/index.html"
-  status = 200
-
 # Security headers via Netlify config (alternative to _headers)
-[headers]
+[[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "no-referrer"
+    Permissions-Policy = "interest-cohort=()"
+
+# Cache static assets aggressively
+[[headers]]
+  for = "/attached_assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache favicon
+[[headers]]
+  for = "/favicon.ico"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/attached_assets/favicon.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache fonts
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
     Permissions-Policy = "interest-cohort=()"

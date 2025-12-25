@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { Particles } from "@/components/Particles";
 import {
   Accordion,
   AccordionContent,
@@ -34,6 +35,7 @@ export default function FAQ() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
+      <Particles />
       <Navigation />
       <div className="pt-20" />
       

@@ -26,17 +26,36 @@ export default function Landing() {
         transition={{ duration: 0.8 }}
         className="text-center space-y-8"
       >
-        {/* GOTHTAG Title with glow */}
+        {/* Logo with glow effect */}
         <motion.div
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1, ease: 'easeOut' }}
+          className="relative mb-12"
+        >
+          <img 
+            src="attached_assets/tag.png" 
+            alt="GothTag Logo" 
+            className="w-48 h-48 md:w-64 md:h-64 mx-auto relative z-10"
+            style={{
+              filter: 'drop-shadow(0 0 30px rgba(255,255,255,0.8))',
+              willChange: 'filter, transform',
+              transform: 'translate3d(0, 0, 0)'
+            }}
+          />
+        </motion.div>
+
+        {/* GOTHTAG Title with glow */}
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
           className="relative"
         >
-          <h1 className="text-8xl md:text-9xl font-display text-white tracking-widest drop-shadow-[0_0_30px_rgba(255,255,255,0.8)]">
+          <h1 className="text-6xl md:text-8xl font-display text-white tracking-widest drop-shadow-[0_0_30px_rgba(255,255,255,0.8)]">
             GOTHTAG
           </h1>
-          <div className="absolute inset-0 text-8xl md:text-9xl font-display text-white tracking-widest blur-2xl opacity-40">
+          <div className="absolute inset-0 text-6xl md:text-8xl font-display text-white tracking-widest blur-2xl opacity-40">
             GOTHTAG
           </div>
         </motion.div>
@@ -45,7 +64,7 @@ export default function Landing() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           className="pt-12"
         >
           <button

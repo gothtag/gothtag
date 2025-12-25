@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { GothicButton } from "@/components/GothicButton";
+import { Particles } from "@/components/Particles";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Flame, Moon, Scroll, Skull } from "lucide-react";
@@ -8,6 +9,7 @@ import { Flame, Moon, Scroll, Skull } from "lucide-react";
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-background relative overflow-hidden">
+      <Particles />
       <Navigation />
       <div className="pt-20" />
       
