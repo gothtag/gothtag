@@ -2,6 +2,19 @@
   command = "npm run build"
   publish = "dist"
 
+# Force HTTPS - Redirect HTTP to HTTPS
+[[redirects]]
+  from = "http://gothtag.com/*"
+  to = "https://gothtag.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.gothtag.com/*"
+  to = "https://gothtag.com/:splat"
+  status = 301
+  force = true
+
 # Optional: route SPA to index.html
 [[redirects]]
   from = "/app/*"
