@@ -3,4 +3,6 @@
 /faq /faq.html 200
 /socials /socials.html 200
 /apply /apply.html 200
-/* /index.html 200
+/team /team.html 200
+/app/* /index.html 200
+/* /404.html 404

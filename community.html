@@ -24,17 +24,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Sans+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="attached_assets/gothtag_black.png">
-    <meta name="theme-color" content="#0a0a0a">
     <link rel="shortcut icon" type="image/png" href="attached_assets/gothtag_black.png">
-    <meta property="og:title" content="Gothtag | Goth Community">
-    <meta property="og:description" content="A place for goth culture, art, music, and people who actually get it">
-    <meta property="og:image" content="https://images.guns.lol/262084fcb2a12da1058383308f51e2f4ea6315db/hk31O9.png">
-    <meta property="og:url" content="https://gothtag.com">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Gothtag | Goth Community">
-    <meta name="twitter:description" content="A place for goth culture, art, music, and people who actually get it">
-    <meta name="twitter:image" content="https://images.guns.lol/262084fcb2a12da1058383308f51e2f4ea6315db/hk31O9.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -152,6 +142,29 @@
             cursor: pointer;
             text-decoration: none;
             display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        .gothic-button > * {
+            position: relative;
+            z-index: 1;
+        }
+        .gothic-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: 0;
+        }
+        .gothic-button:hover::before {
+            width: 300px;
+            height: 300px;
         }
         .gothic-button:hover {
             background: white;
@@ -166,7 +179,31 @@
             background: rgba(0,0,0,0.3);
             text-align: center;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
+        
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 100%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255,255,255,0.05),
+                transparent
+            );
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+        
+        .member-card:hover::before {
+            left: -50%;
+        }
+        
         .member-card:hover {
             border-color: rgba(255,255,255,0.3);
             background: rgba(0,0,0,0.5);
@@ -330,7 +367,7 @@ The community is open, chill, and welcoming from baby-bats to longtime goths, al
                 Moderator applications are open for active and serious members who want to help run the server.
             </p>
             <a href="apply.html" class="gothic-button fade-in" style="animation-delay: 2.2s;">
-                Join the Staff
+                <span>Join the Staff</span>
             </a>
         </div>
     </main>
@@ -358,5 +395,26 @@ The community is open, chill, and welcoming from baby-bats to longtime goths, al
             </div>
         </div>
     </footer>
+
+    <script>
+        // Create floating particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.bottom = '0';
+            particle.style.animation = `float ${12 + Math.random() * 10}s linear`;
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 22000);
+        }
+
+        setInterval(createParticle, 1500);
+        for(let i = 0; i < 6; i++) {
+            setTimeout(createParticle, i * 500);
+        }
+    </script>
 </body>
 </html>

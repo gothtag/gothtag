@@ -63,6 +63,12 @@
             margin-bottom: 2rem;
             filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.2))
                     drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+            transition: transform 0.1s ease-out;
+            user-select: none;
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
         }
 
         @keyframes glow {
@@ -75,6 +81,140 @@
                         drop-shadow(0 0 15px rgba(255, 255, 255, 0.4))
                         drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
             }
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loading-text {
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.875rem;
+            letter-spacing: 0.3em;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            margin-top: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .loading-bar {
+            width: 200px;
+            height: 1px;
+            background: rgba(255,255,255,0.1);
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loading-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            animation: loadingSlide 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingSlide {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        /* Particles */
+        .particle {
+            position: fixed;
+            width: 2px;
+            height: 2px;
+            background: rgba(255,255,255,0.3);
+            pointer-events: none;
+            z-index: 1;
+            border-radius: 50%;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(50px);
+                opacity: 0;
+            }
+        }
+
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch:hover::before,
+        .glitch:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch:hover::before {
+            animation: glitch-1 0.3s infinite;
+            color: rgba(255,0,0,0.7);
+            z-index: -1;
+        }
+
+        .glitch:hover::after {
+            animation: glitch-2 0.3s infinite;
+            color: rgba(0,255,255,0.7);
+            z-index: -2;
+        }
+
+        @keyframes glitch-1 {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        @keyframes glitch-2 {
+            0% { transform: translate(0); }
+            20% { transform: translate(2px, -2px); }
+            40% { transform: translate(2px, 2px); }
+            60% { transform: translate(-2px, -2px); }
+            80% { transform: translate(-2px, 2px); }
+            100% { transform: translate(0); }
         }
 
         .background-video {
@@ -107,6 +247,13 @@
     </style>
 </head>
 <body onclick="enterSite()">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <img src="attached_assets/tag.png" class="glow-logo" alt="GOTHTAG" style="max-width: 300px; opacity: 0.8;">
+        <div class="loading-text">Loading</div>
+        <div class="loading-bar"></div>
+    </div>
+
     <!-- Background Video -->
     <video class="background-video" autoplay muted loop playsinline>
         <source src="https://r2.guns.lol/cb266527-84f4-4c15-833c-8c6dc327af31.mp4" type="video/mp4">
@@ -117,12 +264,64 @@
     <div class="vignette"></div>
 
     <div class="content">
-        <img src="attached_assets/tag.png" class="glow-logo" alt="GOTHTAG">
+        <img src="attached_assets/tag.png" class="glow-logo glitch logo-3d" data-text="GOTHTAG" alt="GOTHTAG">
     </div>
 
     <script>
+        // Loading screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Parallax 3D sur le logo
+        const logo = document.querySelector('.logo-3d');
+        if (logo) {
+            // Protections
+            logo.setAttribute('draggable', 'false');
+            logo.addEventListener('dragstart', function(e) {
+                e.preventDefault();
+                return false;
+            });
+            logo.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+                return false;
+            });
+
+            document.addEventListener('mousemove', function(e) {
+                const x = (e.clientX / window.innerWidth - 0.5) * 20;
+                const y = (e.clientY / window.innerHeight - 0.5) * 20;
+                logo.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${-y}deg) scale(1.05)`;
+            });
+
+            // Reset au départ
+            document.addEventListener('mouseleave', function() {
+                logo.style.transform = 'perspective(1000px) rotateY(0deg) rotateX(0deg) scale(1)';
+            });
+        }
+
+        // Particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.bottom = '0';
+            particle.style.animation = `float ${8 + Math.random() * 10}s linear`;
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 18000);
+        }
+
+        setInterval(createParticle, 800);
+
         function enterSite() {
-            window.location.href = '/home';
+            document.body.style.cursor = 'wait';
+            setTimeout(function() {
+                window.location.href = '/home';
+            }, 300);
         }
     </script>
 </body>
