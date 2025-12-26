@@ -80,6 +80,20 @@
         }
     </script>
     <style>
+                        /* Curseur main (cursor.png) sur tous les éléments interactifs au survol, focus et clic */
+                        a:hover, a:focus, a:active,
+                        button:hover, button:focus, button:active,
+                        .gothic-button:hover, .gothic-button:focus, .gothic-button:active,
+                        .nav-button:hover, .nav-button:focus, .nav-button:active,
+                        .link:hover, .link:focus, .link:active,
+                        .social-link:hover, .social-link:focus, .social-link:active,
+                        [role="button"]:hover, [role="button"]:focus, [role="button"]:active {
+                            cursor: url('attached_assets/cursor.png') 1 1, auto !important;
+                        }
+                /* Curseur texte = cursor2 partout sur les textes */
+                p, label, span, h1, h2, h3, h4, h5, h6, .faq-answer, .faq-question, .form-label, .form-text, .form-description, .form-title, .form-section, .form-group, .form-control, .form-input, .form-helper, .form-error, .form-success, .form-info, .form-note, .form-tip, .form-warning, .form-message, .form-field, .form-row, .form-col, .form-block, .form-content, .form-header, .form-footer, .form-main, .form-extra, .form-section-title, .form-section-desc, .form-section-content, .form-section-footer {
+                    cursor: url('attached_assets/cursor2.png') 1 1, auto !important;
+                }
         @font-face {
             font-family: 'Taylor Gothic';
             src: url('attached_assets/fonts/TaylorGothic.woff2') format('woff2'),

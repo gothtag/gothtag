@@ -69,6 +69,16 @@
         }
     </script>
     <style>
+                /* Curseur main (cursor.png) sur tous les éléments interactifs au survol, focus et clic */
+                a:hover, a:focus, a:active,
+                button:hover, button:focus, button:active,
+                .gothic-button:hover, .gothic-button:focus, .gothic-button:active,
+                .nav-button:hover, .nav-button:focus, .nav-button:active,
+                .link:hover, .link:focus, .link:active,
+                .social-link:hover, .social-link:focus, .social-link:active,
+                [role="button"]:hover, [role="button"]:focus, [role="button"]:active {
+                    cursor: url('attached_assets/cursor.png') 1 1, auto !important;
+                }
         @font-face {
             font-family: 'Taylor Gothic';
             src: url('attached_assets/fonts/TaylorGothic.woff2') format('woff2'),

@@ -79,6 +79,21 @@
         }
     </script>
     <style>
+                        /* Curseur main (cursor.png) sur tous les éléments interactifs au survol, focus et clic */
+                        a:hover, a:focus, a:active,
+                        button:hover, button:focus, button:active,
+                        .gothic-button:hover, .gothic-button:focus, .gothic-button:active,
+                        .nav-button:hover, .nav-button:focus, .nav-button:active,
+                        .link:hover, .link:focus, .link:active,
+                        .social-link:hover, .social-link:focus, .social-link:active,
+                        [role="button"]:hover, [role="button"]:focus, [role="button"]:active {
+                            cursor: url('attached_assets/cursor.png') 1 1, auto !important;
+                        }
+                /* S’assure que les liens mailto restent cliquables même après l’animation */
+                .faq-answer a[href^="mailto"] {
+                    position: relative;
+                    z-index: 10;
+                }
         @font-face {
             font-family: 'Taylor Gothic';
             src: url('attached_assets/fonts/TaylorGothic.woff2') format('woff2'),
@@ -420,7 +435,7 @@
             <div class="faq-item fade-in" style="animation-delay: 0.7s;">
                 <h3 class="faq-question">Do you collaborate with creators or brands?</h3>
                 <p class="faq-answer">
-                    Yes! If you want to do a partnership with GOTHTAG, either open a ticket on our Discord or contact us at contact@gothtag.com.
+                    Yes! If you want to do a partnership with GOTHTAG, either open a ticket on our Discord or contact us at <a href="mailto:contact@gothtag.com" style="color:#fff;text-decoration:underline;">contact@gothtag.com</a>.
                 </p>
             </div>
 
