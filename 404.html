@@ -26,6 +26,51 @@
     </script>
     
     <style>
+        /* Style .gothic-button identique à home.html */
+        .gothic-button {
+            padding: 1rem 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: white;
+            background: transparent;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+        .gothic-button > * {
+            position: relative;
+            z-index: 1;
+        }
+        .gothic-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            z-index: 0;
+        }
+        .gothic-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        .gothic-button:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.2);
+            cursor: url('attached_assets/cursor.png') 1 1, auto;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -122,47 +167,6 @@
             animation: fadeInUp 0.8s ease-out 0.6s both;
         }
 
-        .gothic-button {
-            padding: 1rem 2.5rem;
-            border: 1px solid rgba(255,255,255,0.4);
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.875rem;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            color: white;
-            background: transparent;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            animation: fadeInUp 0.8s ease-out 0.9s both;
-        }
-
-        .gothic-button::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: white;
-            transition: left 0.4s;
-            z-index: -1;
-        }
-
-        .gothic-button:hover {
-            color: black;
-            border-color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(255,255,255,0.2);
-            cursor: url('attached_assets/cursor.png') 1 1, auto;
-        }
-
-        .gothic-button:hover::before {
-            left: 0;
-        }
 
         @keyframes fadeInUp {
             from {
@@ -258,14 +262,14 @@
     <div class="vignette"></div>
 
     <div class="content">
-        <div class="skull">☠</div>
+        <div class="skull"><img src="attached_assets/skull.png" alt="skull" style="width:3rem;height:3rem;opacity:0.3;"></div>
         <div class="error-code">404</div>
-        <h1 class="error-title">Lost in the Void</h1>
+        <h1 class="error-title">Page not found</h1>
         <p class="error-message">
-            The page you seek has vanished into the darkness.<br>
-            Perhaps it never existed... or perhaps it was consumed by the shadows.
+            Well… this is awkward<br>
+            This page isn’t part of the site.
         </p>
-        <a href="/home" class="gothic-button">Return to the Sanctuary</a>
+        <a href="/home" class="gothic-button"><span>Return to the Sanctuary</span></a>
         
         <div class="links">
             <a href="/home" class="link">Home</a>
