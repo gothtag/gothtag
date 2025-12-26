@@ -11,7 +11,7 @@
 # Cache x files aggressively
 /x.ico
   Cache-Control: public, max-age=31536000, immutable
-/attached_assets/x.png
+/attached_assets/favicon.png
   Cache-Control: public, max-age=31536000, immutable
 
 # Cache fonts

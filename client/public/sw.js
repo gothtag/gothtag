@@ -4,7 +4,7 @@ const x_CACHE = 'x-cache-v1';
 
 // Resources to cache immediately
 const urlsToCache = [
-  '/attached_assets/x.png',
+  '/attached_assets/favicon.png',
   '/x.ico'
 ];
 

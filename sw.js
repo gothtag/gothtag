@@ -1,6 +1,6 @@
 // Service Worker pour cacher le x
 const CACHE_NAME = 'gothtag-v1';
-const x_URL = '/attached_assets/x.png';
+const x_URL = '/attached_assets/favicon.png';
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
